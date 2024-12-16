@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 const router = express.Router();
 
 router.get("/", (_req, res) => {
+  console.log("get photos");
+
   const buffer = fs.readFileSync("./data/photos.json");
   const photoData = JSON.parse(buffer); 
 
@@ -11,6 +13,7 @@ router.get("/", (_req, res) => {
 });
 
 router.get("/:id", (req, res) =>{
+  console.log("photoID: ", req.params.id);
   const photoID = req.params.id;
   const buffer = fs.readFileSync("./data/photos.json");
   const photoData = JSON.parse(buffer); 
@@ -24,6 +27,8 @@ router.get("/:id", (req, res) =>{
 });
 
 router.get("/:id/comments", (req, res) =>{
+  console.log("comments for: ", req.params.id);
+
   const photoID = req.params.id;
   const buffer = fs.readFileSync("./data/photos.json");
   const photoData = JSON.parse(buffer); 
@@ -39,6 +44,8 @@ router.get("/:id/comments", (req, res) =>{
 
 
 router.post("/:id/comments", (req, res)=>{
+  console.log("posting comment");
+
   const photoID = req.params.id;
   const {name, comment} = req.body;
   const buffer = fs.readFileSync("./data/photos.json");
